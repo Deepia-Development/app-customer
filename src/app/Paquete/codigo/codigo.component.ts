@@ -4,6 +4,7 @@ import { from } from 'rxjs';
 import { EnviosDataService } from 'src/app/_services/envios/envios-data.service';
 import { ShipmentData, Address,ShipmentDimensions } from 'src/app/models/shipmentData';
 import { JwtPayload } from 'jwt-decode';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-codigo',
   templateUrl: './codigo.component.html',
@@ -140,15 +141,46 @@ export class CodigoComponent implements OnInit {
       idService: this.idService,
       isInternational: false
     }
+  
+    Swal.fire({
+      title: 'Creando envío...',
+      text: 'Por favor espere',
+      icon: 'info',
+      allowOutsideClick: false
+    });
+    Swal.showLoading();
+
 
     this.enviosDataService.createShipment(newShipment, user_id).subscribe(
       response => {
         console.log('Envío creado exitosamente', response);
         console.log('Folio:', response.shipment);
         this.segure = response.shipment;
+      
+
+        if(!response.success){
+          Swal.fire({
+            title: 'Error al crear el envío',
+            text: response.message,
+            icon: 'error'
+          });
+        }
+
+        Swal.fire({
+          title: 'Envío creado',
+          text: `Folio: ${response.shipment}`,
+          icon: 'success'
+        });
+
+
         this.router.navigate(['/cotizaciones']);
       },
       error => {
+        Swal.fire({
+          title: 'Error al crear el envío',
+          text: error,
+          icon: 'error'
+        });
         console.error('Error al crear el envío:', error);
       }
     );

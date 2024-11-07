@@ -42,6 +42,12 @@ interface QuoteResponse {
       paqueterias: any[];
     };
   };
+  estafeta: {
+    success: boolean;
+    data: {
+      paqueterias: any[];
+    };
+  };
 }
 
 @Injectable({
@@ -57,7 +63,7 @@ export class QuotesService {
         map(response => {
           const filterByPrice = (paqueterias: any[]) => {
             // Verifica que paqueterias es un array antes de usar filter
-            return Array.isArray(paqueterias) ? paqueterias.filter(p => p.precio > 0) : [];
+            return Array.isArray(paqueterias) ? paqueterias.filter(p => p.precio > 0 ) : [];
           };
   
           const result = {

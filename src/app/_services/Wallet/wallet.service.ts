@@ -31,4 +31,28 @@ export class WalletService {
     return this.http.post<any>(`${this.apiUrl}/wallet/initialize/${userId}`,  { headers });
 
   }
-}
+
+  createCheckoutSession(userId: string) {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    };
+  
+    return this.http.post<any>(
+      `${this.apiUrl}/stripe/create-checkout-session`,
+      { user_id: userId },  // Here userId is renamed to user_id in the body
+      { headers }
+    );
+  }
+
+  
+
+ 
+  
+ }
+
+
+
+
+
