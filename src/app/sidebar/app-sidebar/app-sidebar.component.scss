@@ -1,0 +1,6 @@
+// app-sidebar.component.scss
+:host {
+  .translate-x-full {
+    transform: translateX(-100%);
+  }
+}

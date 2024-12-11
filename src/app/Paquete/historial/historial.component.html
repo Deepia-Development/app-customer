@@ -48,7 +48,8 @@
                 [ngClass]="{
                   'bg-green-100 text-green-800': pedido.estado === 'Entregado',
                   'bg-yellow-100 text-yellow-800':
-                    pedido.estado === 'En tránsito' || pedido.estado === 'En recolección',
+                    pedido.estado === 'En tránsito' ||
+                    pedido.estado === 'En recolección',
                   'bg-blue-100 text-blue-800': pedido.estado === 'Procesando'
                 }"
                 class="px-3 py-1 rounded-full text-sm font-medium"

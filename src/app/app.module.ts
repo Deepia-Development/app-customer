@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -47,22 +51,22 @@ export function tokenGetter() {
     HistorialComponent,
     ForgotPassComponent,
     HistorialDetailsComponent,
-    WalletComponent
+    WalletComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     QRCodeModule,
     LottieModule.forRoot({ player: playerFactory }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:3000"], 
-        disallowedRoutes: ["http://localhost:3000/api/v1/customer/login"] 
-      }
-    })
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: ['http://localhost:3000/api/v1/customer/login'],
+      },
+    }),
   ],
   providers: [
     AuthService,
@@ -72,9 +76,9 @@ export function tokenGetter() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CatchTokenService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

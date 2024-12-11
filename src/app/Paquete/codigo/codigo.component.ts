@@ -148,7 +148,7 @@ export class CodigoComponent implements OnInit {
       icon: 'info',
       allowOutsideClick: false
     });
-    Swal.showLoading();
+    Swal.showLoading(null);
 
 
     this.enviosDataService.createShipment(newShipment, user_id).subscribe(

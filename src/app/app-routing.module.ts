@@ -14,26 +14,44 @@ import { ForgotPassComponent } from './Users/forgot-pass/forgot-pass.component';
 import { HistorialDetailsComponent } from './Paquete/historial-details/historial-details.component';
 import { WalletComponent } from './wallet/wallet.component';
 
-
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-pass', component: ForgotPassComponent },
   { path: 'cotizar', component: CotizarComponent, canActivate: [AuthGuard] },
-  { path: 'historial', component: HistorialComponent, canActivate: [AuthGuard] },
-  { path: 'paqueterias', component: PaqueteriasComponent, canActivate: [AuthGuard] },
-  { path: 'descripcion', component: DescripcionComponent, canActivate: [AuthGuard] },
+  {
+    path: 'historial',
+    component: HistorialComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'paqueterias',
+    component: PaqueteriasComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'descripcion',
+    component: DescripcionComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'codigo', component: CodigoComponent, canActivate: [AuthGuard] },
-  { path: 'instrucciones', component: InstruccionesComponent, canActivate: [AuthGuard] },
-  {path: 'wallet', component: WalletComponent, canActivate: [AuthGuard]},
-  {path:'details/:id', component: HistorialDetailsComponent, canActivate: [AuthGuard]},
+  {
+    path: 'instrucciones',
+    component: InstruccionesComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
+  {
+    path: 'details/:id',
+    component: HistorialDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/cotizar', pathMatch: 'full' },
-  { path: '**', redirectTo: '/cotizar' }
+  { path: '**', redirectTo: '/cotizar' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
