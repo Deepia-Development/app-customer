@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">app-customer</string>
+    <string name="title_activity_main">app-customer</string>
+    <string name="package_name">com.customer.app</string>
+    <string name="custom_url_scheme">com.customer.app</string>
+</resources>
