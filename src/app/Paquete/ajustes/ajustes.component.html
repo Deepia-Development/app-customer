@@ -1,0 +1,191 @@
+<div class="min-h-screen bg-gray-100 flex relative overflow-hidden">
+  <app-app-sidebar [isSidebarOpen]="isSidebarOpen"></app-app-sidebar>
+
+  <div class="flex-1 flex flex-col p-4">
+    <div
+      class="w-full max-w-4xl mx-auto px-8 py-10 bg-white rounded-2xl shadow-lg relative"
+    >
+      <!-- Hamburger -->
+      <div class="absolute top-4 right-4">
+        <button
+          (click)="openSidebar()"
+          class="text-orange-600 focus:outline-none hover:text-orange-700"
+        >
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h3 class="text-2xl font-bold text-orange-600">
+          Configuración de cuenta
+        </h3>
+      </div>
+
+      <!-- Message Display -->
+      <div
+        *ngIf="message"
+        [ngClass]="{
+          'bg-green-100 text-green-700': messageType === 'success',
+          'bg-red-100 text-red-700': messageType === 'error'
+        }"
+        class="p-4 rounded-lg mb-4"
+      >
+        {{ message }}
+      </div>
+
+      <!-- Update Profile Info section -->
+      <div class="border rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">
+          Información Personal
+        </h2>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700"
+                >Nombre completo</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="userName"
+                [disabled]="!isEditingName"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+              />
+            </div>
+            <button
+              *ngIf="!isEditingName"
+              (click)="isEditingName = true"
+              class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Editar
+            </button>
+            <button
+              *ngIf="isEditingName"
+              (click)="saveNameChange()"
+              class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Guardar
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700"
+                >Correo electrónico</label
+              >
+              <input
+                type="email"
+                [(ngModel)]="userEmail"
+                [disabled]="!isEditingEmail"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+              />
+            </div>
+            <button
+              *ngIf="!isEditingEmail"
+              (click)="isEditingEmail = true"
+              class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Editar
+            </button>
+            <button
+              *ngIf="isEditingEmail"
+              (click)="saveEmailChange()"
+              class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Section -->
+      <div class="border rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Cambiar Contraseña</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Contraseña actual</label
+            >
+            <input
+              type="password"
+              [(ngModel)]="currentPassword"
+              [disabled]="!isEditingPassword"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Nueva contraseña</label
+            >
+            <input
+              type="password"
+              [(ngModel)]="newPassword"
+              [disabled]="!isEditingPassword"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Confirmar nueva contraseña</label
+            >
+            <input
+              type="password"
+              [(ngModel)]="confirmPassword"
+              [disabled]="!isEditingPassword"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              *ngIf="!isEditingPassword"
+              (click)="isEditingPassword = true"
+              class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2"
+            >
+              Editar
+            </button>
+            <button
+              *ngIf="isEditingPassword"
+              (click)="savePasswordChange()"
+              class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="border rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Notificaciones</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">Notificaciones por correo</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                [(ngModel)]="emailNotifications"
+                class="sr-only peer"
+              />
+              <div
+                class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"
+              ></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">Notificaciones push</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                [(ngModel)]="pushNotifications"
+                class="sr-only peer"
+              />
+              <div
+                class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"
+              ></div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

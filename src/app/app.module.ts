@@ -28,6 +28,7 @@ import { AuthGuard } from './_services/autenticacion/auth-guard.service';
 import { ForgotPassComponent } from './Users/forgot-pass/forgot-pass.component';
 import { HistorialDetailsComponent } from './Paquete/historial-details/historial-details.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { AjustesComponent } from './Paquete/ajustes/ajustes.component';
 
 export function playerFactory() {
   return lottie;
@@ -52,6 +53,7 @@ export function tokenGetter() {
     ForgotPassComponent,
     HistorialDetailsComponent,
     WalletComponent,
+    AjustesComponent,
   ],
   imports: [
     BrowserModule,

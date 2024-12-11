@@ -13,12 +13,14 @@ import { AuthGuard } from './_services/autenticacion/auth-guard.service';
 import { ForgotPassComponent } from './Users/forgot-pass/forgot-pass.component';
 import { HistorialDetailsComponent } from './Paquete/historial-details/historial-details.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { AjustesComponent } from './Paquete/ajustes/ajustes.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-pass', component: ForgotPassComponent },
   { path: 'cotizar', component: CotizarComponent, canActivate: [AuthGuard] },
+  { path: 'ajustes', component: AjustesComponent },
   {
     path: 'historial',
     component: HistorialComponent,
